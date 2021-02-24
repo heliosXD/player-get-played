@@ -42,8 +42,16 @@ use serde_json::{
 };
 
 
+//TODO fix this struct shit
+#[derive(Deserialize)]
+struct dataInfo {
+    price: Vec<u32>,
+}
+
+
+
 #[tokio::main]
-pub async fn main() -> std::result::Result<(), Box<dyn std::error::Error + Send + Sync>> {
+pub async fn pastyy() -> std::result::Result<(), Box<dyn std::error::Error + Send + Sync>> {
     
     
     let https = HttpsConnector::new();
@@ -54,18 +62,27 @@ pub async fn main() -> std::result::Result<(), Box<dyn std::error::Error + Send 
         .await?;
     let mut btccc = Vec::new();
 
+    
 
-    // parse conversion
-    let bod_byte = body::to_bytes(res.into_body()).await?;
-    let body = String::from_utf8(bod_byte.to_vec())
-        .expect("resp not utf8");
-    let v: Value = serde_json::from_str(&body).unwrap();
-    for e in v["data"].as_object().unwrap(){
-        btccc.push(e);
-      }
 
-    let price = btccc[6];
-    println!("{:?}", price);
+
+    //// parse conversion
+    //let bod_byte = body::to_bytes(res.into_body()).await?;
+    //let body = String::from_utf8(bod_byte.to_vec())
+    //    .expect("resp not utf8");
+    //let v: Value = serde_json::from_str(&body).unwrap();
+    //for e in v["data"].as_object().unwrap(){
+    //    btccc.push(e);
+    //}
+
+    //let price = btccc[6];
+    //println!("{:?}", price);
+
+
+
+
+
+
     //println!("{:?}", v["data"]["price"]);
     //let INFO = v["data"].as_array().unwrap();
     //println!("{}", tester.Price);
